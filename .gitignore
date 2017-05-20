@@ -1,0 +1,8 @@
+# Compiled Object Files
+*.o
+
+# Executables
+*.out
+
+# Initial Test Executable
+run
