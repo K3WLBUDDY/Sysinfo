@@ -12,7 +12,8 @@ private:
 
 public:
 
-	void setVendorIDfromHex(uint32_t, uint32_t, uint32_t);
+	void setVendorIDfromHex();
+	void setCpuSignature();
 
 	std::string getVendorID() const;
 };
