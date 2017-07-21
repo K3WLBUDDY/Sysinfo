@@ -3,7 +3,7 @@
 #include "sysCPU.h"
 int main()
 {
-	std::string vendorID;
+	std::string vendorID, brand;
 	sysCPU s;
 	uint32_t signature;
 	uint32_t family;
@@ -14,6 +14,8 @@ int main()
 
 	s.setVendorID();
 	s.setSignature();
+	s.setBrandString();
+
 	signature = s.getSignature();
 	family = s.getFamily();
 	extFamily = s.getExtFamily();
@@ -21,16 +23,20 @@ int main()
 	stepping = s.getStepping();
 	model = s.getModel();
 	extModel = s.getExtModel();
-	s.generateBrandString();
+	brand = s.getBrandString();
+	
 
 	if(family >= 15)
 		family += extFamily;
 
 	std::cout<<"\n Vendor ID : "<<vendorID;
+	std::cout<<"\n Brand : "<<brand<<"\n";
 	std::cout<<"\n CPU Family : "<<std::hex<<family<<"h";
 	std::cout<<"\n CPU Stepping : "<<std::hex<<stepping<<"\n";
-	std::cout<<"\n Extended Model : "<<std::hex<<extModel<<model;
-	std::cout<<"\n Model : "<<std::hex<<model<<"\n";
+	std::cout<<"\n Model : "<<std::hex<<model;
+	std::cout<<"\n Extended Model : "<<std::hex<<extModel<<model<<"\n";
+	
+	
 
 	return 0;
 }

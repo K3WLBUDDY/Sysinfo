@@ -21,15 +21,17 @@ public:
 
 	void setVendorID();
 	void setSignature();
+	void setBrandString();
 
 	std::string getVendorID() const;
+	std::string getBrandString() const;
 	uint32_t getFamily() const;
 	uint32_t getSignature() const;
 	uint32_t getExtFamily() const;
 	uint32_t getStepping() const;
 	uint32_t getModel() const;
 	uint32_t getExtModel() const;
-	void generateBrandString();
+	
 };
 
 #endif

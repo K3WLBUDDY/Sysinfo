@@ -12,7 +12,7 @@ void sysCPU::setVendorID()
 		  "=d" (edx)
 		: "a" (op));
 
-    _vendorID = ebx & 0xff;
+  _vendorID = ebx & 0xff;
 	_vendorID += (ebx >> 8) & 0xff;
 	_vendorID += (ebx >> 16) & 0xff;
 	_vendorID += (ebx >> 24) & 0xff;
@@ -32,7 +32,7 @@ std::string sysCPU::getVendorID() const
 	return _vendorID;
 }
 
-void sysCPU::generateBrandString()
+void sysCPU::setBrandString()
 {
 	uint32_t op = 0x80000002;
 	uint32_t edx, eax, ebx, ecx;
@@ -114,8 +114,6 @@ void sysCPU::generateBrandString()
 	_brandString += (edx >> 8) & 0xff;
 	_brandString += (edx >> 16) & 0xff;
 	_brandString += (edx >> 24) & 0xff;
-
-	std::cout<<"\n String : "<<_brandString;
 }
 
 void sysCPU::setSignature()
@@ -166,4 +164,9 @@ uint32_t sysCPU::getModel() const
 uint32_t sysCPU::getExtModel() const
 {
 	return _extModel;
+}
+
+std::string sysCPU::getBrandString() const
+{
+	return _brandString;
 }
