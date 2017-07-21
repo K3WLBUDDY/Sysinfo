@@ -1,6 +1,3 @@
-//AT&T Syntax - Followed by GCC - inst source dest
-
-//#include <stdio.h>
 #include <iostream>
 #include <string>
 #include "sysCPU.h"
@@ -24,15 +21,16 @@ int main()
 	stepping = s.getStepping();
 	model = s.getModel();
 	extModel = s.getExtModel();
+	s.generateBrandString();
 
 	if(family >= 15)
 		family += extFamily;
 
 	std::cout<<"\n Vendor ID : "<<vendorID;
 	std::cout<<"\n CPU Family : "<<std::hex<<family<<"h";
-	std::cout<<"\n CPU Stepping : "<<std::hex<<stepping;
-	std::cout<<"\n Extended Model : "<<extModel<<model;
-	std::cout<<"\n Model : "<<model;
+	std::cout<<"\n CPU Stepping : "<<std::hex<<stepping<<"\n";
+	std::cout<<"\n Extended Model : "<<std::hex<<extModel<<model;
+	std::cout<<"\n Model : "<<std::hex<<model<<"\n";
 
 	return 0;
 }

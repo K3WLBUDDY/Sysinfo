@@ -1,5 +1,5 @@
 #include "sysCPU.h"
-
+#include <iostream>
 void sysCPU::setVendorID()
 {
 	uint32_t eax, ebx, ecx, edx;
@@ -32,13 +32,100 @@ std::string sysCPU::getVendorID() const
 	return _vendorID;
 }
 
+void sysCPU::generateBrandString()
+{
+	uint32_t op = 0x80000002;
+	uint32_t edx, eax, ebx, ecx;
+
+	asm("cpuid"
+		: "=a" (eax),
+		  "=b" (ebx),
+		  "=c" (ecx),
+		  "=d" (edx)
+		: "a" (op));
+
+	_brandString = eax & 0xff;
+	_brandString += (eax >> 8) & 0xff;
+	_brandString += (eax >> 16) & 0xff;
+	_brandString += (eax >> 24) & 0xff;
+	_brandString += ebx & 0xff;
+	_brandString += (ebx >> 8) & 0xff;
+	_brandString += (ebx >> 16) & 0xff;
+	_brandString += (ebx >> 24) & 0xff;
+	_brandString += ecx & 0xff;
+	_brandString += (ecx >> 8) & 0xff;
+	_brandString += (ecx >> 16) & 0xff;
+	_brandString += (ecx >> 24) & 0xff;
+	_brandString += edx & 0xff;
+	_brandString += (edx >> 8) & 0xff;
+	_brandString += (edx >> 16) & 0xff;
+	_brandString += (edx >> 24) & 0xff;
+	
+	
+
+	op = 0x80000003;
+
+	asm("cpuid"
+		: "=a" (eax),
+		  "=b" (ebx),
+		  "=c" (ecx),
+		  "=d" (edx)
+		: "a" (op));
+
+	_brandString += eax & 0xff;
+	_brandString += (eax >> 8) & 0xff;
+	_brandString += (eax >> 16) & 0xff;
+	_brandString += (eax >> 24) & 0xff;
+	_brandString += ebx & 0xff;
+	_brandString += (ebx >> 8) & 0xff;
+	_brandString += (ebx >> 16) & 0xff;
+	_brandString += (ebx >> 24) & 0xff;
+	_brandString += ecx & 0xff;
+	_brandString += (ecx >> 8) & 0xff;
+	_brandString += (ecx >> 16) & 0xff;
+	_brandString += (ecx >> 24) & 0xff;
+	_brandString += edx & 0xff;
+	_brandString += (edx >> 8) & 0xff;
+	_brandString += (edx >> 16) & 0xff;
+	_brandString += (edx >> 24) & 0xff;
+
+	op = 0x80000004;
+
+	asm("cpuid"
+		: "=a" (eax),
+		  "=b" (ebx),
+		  "=c" (ecx),
+		  "=d" (edx)
+		: "a" (op));
+
+	_brandString += eax & 0xff;
+	_brandString += (eax >> 8) & 0xff;
+	_brandString += (eax >> 16) & 0xff;
+	_brandString += (eax >> 24) & 0xff;
+	_brandString += ebx & 0xff;
+	_brandString += (ebx >> 8) & 0xff;
+	_brandString += (ebx >> 16) & 0xff;
+	_brandString += (ebx >> 24) & 0xff;
+	_brandString += ecx & 0xff;
+	_brandString += (ecx >> 8) & 0xff;
+	_brandString += (ecx >> 16) & 0xff;
+	_brandString += (ecx >> 24) & 0xff;
+	_brandString += edx & 0xff;
+	_brandString += (edx >> 8) & 0xff;
+	_brandString += (edx >> 16) & 0xff;
+	_brandString += (edx >> 24) & 0xff;
+
+	std::cout<<"\n String : "<<_brandString;
+}
+
 void sysCPU::setSignature()
 {
-	uint32_t eax;
+	uint32_t eax,ebx;
 	uint32_t op=1;
 
 	asm("cpuid"
-		: "=a" (eax)
+		: "=a" (eax),
+		  "=b" (ebx)
 		: "a" (op));
 
 	_stepping = eax & 0xF;
@@ -46,6 +133,9 @@ void sysCPU::setSignature()
 	_extFamily = (eax >> 20) & 0xFF;
 	_model = (eax >> 4) & 0xF;
 	_extModel = (eax >> 16) & 0xF;
+
+	_brandID = ebx & 0xffff;
+
 }
 
 uint32_t sysCPU::getSignature() const

@@ -8,6 +8,8 @@ class sysCPU
 {
 private:
 	std::string _vendorID;
+	std::string _brandString;
+	uint32_t _brandID;
 	uint32_t _signature;
 	uint32_t _family;
 	uint32_t _extFamily;
@@ -27,6 +29,7 @@ public:
 	uint32_t getStepping() const;
 	uint32_t getModel() const;
 	uint32_t getExtModel() const;
+	void generateBrandString();
 };
 
 #endif
