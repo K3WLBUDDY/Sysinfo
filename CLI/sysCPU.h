@@ -16,12 +16,17 @@ private:
 	uint32_t _stepping;
 	uint32_t _model;
 	uint32_t _extModel;
+	uint32_t _logicalCount;
+	uint32_t _smtFlag;
+	uint32_t _mmxFlag;
+	uint32_t _L1Size;
 
 public:
 
 	void setVendorID();
 	void setSignature();
 	void setBrandString();
+	void setL1Cache();
 
 	std::string getVendorID() const;
 	std::string getBrandString() const;

@@ -118,12 +118,13 @@ void sysCPU::setBrandString()
 
 void sysCPU::setSignature()
 {
-	uint32_t eax,ebx;
+	uint32_t eax,ebx,edx;
 	uint32_t op=1;
 
 	asm("cpuid"
 		: "=a" (eax),
-		  "=b" (ebx)
+		  "=b" (ebx),
+		  "=d" (edx)
 		: "a" (op));
 
 	_stepping = eax & 0xF;
@@ -132,8 +133,33 @@ void sysCPU::setSignature()
 	_model = (eax >> 4) & 0xF;
 	_extModel = (eax >> 16) & 0xF;
 
-	_brandID = ebx & 0xffff;
+	_logicalCount = (ebx >>16) & 0xFF;
+	std::cout<<"\n Logical Count: "<<_logicalCount;
 
+	_smtFlag = (edx>>28) & 0x1;
+	std::cout<<"\n SMT Flag : "<<_smtFlag;
+
+	_mmxFlag = (edx >> 23) & 0x1;
+
+	std::cout<<"\n MMX Flag : "<<_mmxFlag;
+
+}
+
+void sysCPU::setL1Cache()
+{
+	uint32_t op = 0x80000005;
+	uint32_t eax, ebx, ecx, edx;
+
+	asm("cpuid"
+		: "=a" (eax),
+		  "=b" (ebx),
+		  "=d" (edx)
+		: "a" (op));
+
+	_L1Size = (ecx >> 24) & 0xF;
+	std::cout<<"\n L1 Size : "<<_L1Size;
+
+		
 }
 
 uint32_t sysCPU::getSignature() const

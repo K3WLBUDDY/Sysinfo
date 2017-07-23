@@ -15,6 +15,7 @@ int main()
 	s.setVendorID();
 	s.setSignature();
 	s.setBrandString();
+	//s.setL1Cache();
 
 	signature = s.getSignature();
 	family = s.getFamily();
