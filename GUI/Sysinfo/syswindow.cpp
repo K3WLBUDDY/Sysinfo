@@ -6,8 +6,12 @@ sysWindow::sysWindow(QWidget *parent) :
   ui(new Ui::sysWindow)
 {
   ui->setupUi(this);
-  s.setVendorIDfromHex();
-  ui->label_2->setText(QString::fromStdString(s.getVendorID()));
+
+  s.setVendorID();
+  s.setSignature();
+  s.setBrandString();
+
+  //ui->label_2->setText(QString::fromStdString(s.getVendorID()));
 }
 
 sysWindow::~sysWindow()
