@@ -1,0 +1,40 @@
+Intel Syntax : Destination Source
+AT&T : Source Destination
+
+GNU assembler uses AT&T syntax.
+
+GNU Extended ASM:
+
+Volatile : Disables certain optimizations due to GNU discarding certain asm statements
+
+Assembler Template : Literal String containing Assembly Instructions
+
+Output Operands : Comma seperated list of C Variables modified by the Assembler Template ins
+
+Input Operands : Comma seperated list of C expressions read by Assembler Template ins
+
+Clobbers : Comma seperated list of regs and other values modified by the Assembler Template
+
+Registers are prefixed with % and numeric constants with $
+
+Assembler Mnemonic Suffixes : 
+
+b = byte, w = word, l = long word
+
+Each x86 Instruction line must be followed by a \n\t as each line is sent as a string to 
+the assembler
+
+General eASM syntax : 
+
+asm [volatile] (AssemblerTemplate 
+: Output Operands (Cvar)
+: Input Operands (Cvar)
+: Clobbers)
+
+Constrains specify the type of Operands (whether register, type of register, constant etc)
+
+r - Allows a General Register Operand
+
+In =r, = is a constraint modifier indicating write only
+
+C variables must be specified in () for Output and Input Operands
